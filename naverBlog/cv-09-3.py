@@ -30,9 +30,11 @@ while cap.isOpened():
     frame = cv2.resize(frame, dsize=(0, 0), fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
     res = cv2.resize(res, dsize=(0, 0), fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
     hsv = cv2.resize(hsv, dsize=(0, 0), fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
+    mask = cv2.resize(mask, dsize=(0, 0), fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
 
     cv2.imshow('original', frame)
     cv2.imshow('seleted', res)
+    cv2.imshow('mask', mask)
 
     cv2.setMouseCallback('original', onMouse, param=hsv)
 
