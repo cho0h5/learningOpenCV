@@ -4,7 +4,15 @@ import cv2
 img = cv2.imread('../DATA/remote.jpg')
 imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+#img = cv2.GaussianBlur(img, (11, 11), 0)
+
 ret, thr = cv2.threshold(imgray, 127, 255, 0)
+
+kernel1 = np.ones((9, 9), np.uint8)
+thr = cv2.erode(thr, kernel1, iterations=1)
+kernel2 = np.ones((15, 15), np.uint8)
+thr = cv2.dilate(thr, kernel2, iterations=1)
+
 contours, _ = cv2.findContours(thr, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 cv2.drawContours(img, contours, -1, (0, 0, 255), 1)
@@ -12,4 +20,4 @@ cv2.imshow('thresh', thr)
 cv2.imshow('contour', img)
 
 cv2.waitKey(0)
-cv2.destoryAllWindows()
+cv2.destroyAllWindows()
